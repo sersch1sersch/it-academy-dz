@@ -9,7 +9,7 @@ function sbros(){
     info.innerHTML = ''
 }
 
-      function HashStorage() {
+      function HashStorageFunk() {
       let storage = {};
         this.addValue = function(napitok,rezept,alcogol) {
             var napitok=prompt('Ввeдите название напитка');
@@ -43,7 +43,7 @@ function sbros(){
             info.innerHTML=(Object.keys(storage))
         }
       }
-      var drinkStorage=new HashStorage();
+      var drinkStorage=new HashStorageFunk();
     
     
  

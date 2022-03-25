@@ -23,5 +23,5 @@ var formDef2=
 ];
 
 let forma = document.forms.form;
-forma.el
+forma.te
 
