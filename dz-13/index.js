@@ -13,46 +13,48 @@ function sbros(){
 
 //13.1
 
-//function HashStorageFunc() {
-//    var storage={};
-//    this.addValue = function(key,value) {
-//storage[key]=value
-//    }
-//    this.getValue= function(key){
-//       return storage[key]
-//    }
-//    this.deleteValue= function(key) {
-//      if(String(key) in storage)
-//        return delete storage[key];
-//        return false;
-//    }
-//    this.getKeys= function(){
-//        console.log(Object.keys(storage))
-//    }
-//  }
-//  var drinkStorage=new HashStorageFunc();
+function HashStorageFunc() {
+    var storage={};
+    this.addValue = function(key,value) {
+storage[key]=value
+    }
+    this.getValue= function(key){
+       return storage[key]
+    }
+    this.deleteValue= function(key) {
+      if(String(key) in storage)
+        return delete storage[key];
+        return false;
+    }
+    this.getKeys= function(){
+        console.log(Object.keys(storage))
+    }
+  }
+  var drink=new HashStorageFunc();
 
 
 //13.2
-class HashStorageClass{
-    
-
+class HashStorageClass {
+  
+   storage ={};
     addValue (key,value) {
-    this[key]=value
+      
+   this.storage[key]=value
       }
     getValue(key){
-           return this[key]
+           return this.storage[key]
+
     }
     deleteValue(key) {
-          if(String(key) in drinkStorage)
-            return delete this[key];
+          if(String(key) in this.storage)
+            return delete this.storage[key];
             return false;
         }
         getKeys(){
-            console.log(Object.keys(drinkStorage))
+            console.log(Object.keys(this.storage))
         }
       }
-      let drinkStorage = new HashStorageClass;
+      let drinkStorage = new HashStorageClass();
     
     
     //13.3
