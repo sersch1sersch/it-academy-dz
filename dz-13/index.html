@@ -9,20 +9,13 @@
 </head>
 
 <body>
-    <main class="container">
-        <section class="section">
-            <div><button class="section-button btn1" onclick="drinkStorage.addValue(napitok,rezept)" >Ввод информации о напитке</button></div>
-            <div><button class="section-button btn2" onclick="drinkStorage.getValue(napitok)">Получение информации о напитке</button></div>
-            <div><button class="section-button btn3" onclick="drinkStorage.deleteValue(napitok)"> Удаление информации о напитке</button></div>
-            <div><button class="section-button btn4" onclick="drinkStorage.getKeys()">Перечень всех напитков</button></div>
-        </section>
-        <section class="information">
-            <div class="information-text text"></div>
-        </section>
-        <section class="section">
-            <div><button class="btn5" onclick="sbros()">Сброс поля</button></div>
-        </section>
-    </main>
+    
+            <div><button class="section-button btn1" onclick="addNapitok()" >Ввод информации о напитке</button></div>
+            <div><button class="section-button btn2" onclick="infoNapitok()">Получение информации о напитке</button></div>
+            <div><button class="section-button btn3" onclick="delNapitok()"> Удаление информации о напитке</button></div>
+            <div><button class="section-button btn4" onclick="perNapitok()">Перечень всех напитков</button></div>
+       
+   
 
     <script src="index.js"></script>
 </body>
