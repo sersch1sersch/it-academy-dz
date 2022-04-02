@@ -5,10 +5,11 @@ class HashStorageClass {
     storage ={};
      addValue (key,value) {
        
-    this.storage[key]=value
+    this.storage[key]=value;
        }
      getValue(key){
-            return this.storage[key]
+      if(key in this.storage)
+      return this.storage[key];
  
      }
      deleteValue(key) {

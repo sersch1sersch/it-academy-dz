@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<form name="form" action="https://fe.it-academy.by/TestForm.php">
+    <div>
+        <label>
+            Разработчики:
+            <input id="developers" type="text" name="developers"><span class="span1"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Название сайта:
+            <input type="text" name="sitename" ><span class="span2"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            URL сайта:
+            <input type="text" name="siteurl"><span class="span3"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Дата запуска сайта:
+            <input type="date" name="Website_launch_date"><span class="span4"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Посетителей в сутки:
+            <input type="number" name="visitors"><span class="span5"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            E-mail для связи:
+            <input type="shorttext" name="email"><span class="span6"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Рубрика каталога:
+            <select name="division"><span class="span7"></span>
+                <option value="1">здоровье</option>
+                <option value="2">домашний уют</option>
+                <option value="3">бытовая техника</option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <label>
+            Размещение:
+            <input id="input8" type="radio" name="payment" value="1" style="margin-right: 10px;">
+            <label>
+                бесплатное
+            </label>
+            <input type="radio" name="payment" value="2" style="margin-right: 10px;">
+            <label>
+                платное
+            </label>
+            <input type="radio" name="payment" value="3" style="margin-right: 10px;"><span class="span8"></span>
+            <label>
+                VIP
+            </label>
+        </label>
+    </div>
+    <div>
+        <label>
+            Разрешить отзывы:
+            <input type="checkbox" name="votes"><span class="span9"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Описание сайта:
+        </label>
+    </div>
+    <div>
+        <textarea name="description"></textarea><span class="span10"></span>
+    </div>
+    <div>
+        <input type="submit" value="Опубликовать">
+    </div>
+    
+
+
+</form>
+
+
+
+
+
+
+
+    <script src="index.js"></script>
+</body>
+</html>

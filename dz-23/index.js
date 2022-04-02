@@ -12,7 +12,6 @@ var formDef1=
   {label:'Описание сайта:',kind:'memo',name:'description'},
   {caption:'Опубликовать',kind:'submit'},
 ];
-
 var formDef2=
 [
   {label:'Фамилия:',kind:'longtext',name:'lastname'},
@@ -22,9 +21,9 @@ var formDef2=
   {caption:'Зарегистрироваться',kind:'submit'},
 ];
 function buildForm(fd){
-  
+
 for(let i=0;i<fd.length;i++){
-    let formItem=fd[i]
+    let formItem=fd[i];
 switch(formItem.kind){
     case'longtext':
     let div = document.createElement('div')
