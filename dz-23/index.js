@@ -20,14 +20,15 @@ var formDef2=
   {label:'Возраст:',kind:'number',name:'age'},
   {caption:'Зарегистрироваться',kind:'submit'},
 ];
-function buildForm(fd){
-
+let form1 = document.querySelector('.form')
+let form2 = document.querySelector('.form1')
+function buildForm(fd,form){
 for(let i=0;i<fd.length;i++){
     let formItem=fd[i];
 switch(formItem.kind){
     case'longtext':
     let div = document.createElement('div')
-    let lab = document.createElement('label')
+    let lab = document.createElement('label') 
 lab.innerHTML=formItem.label
 let fe = document.createElement('input')
 fe.type=formItem.kind
@@ -138,9 +139,8 @@ break;
 }
 }
 }
-
-buildForm(formDef1)
-buildForm(formDef2)
+buildForm(formDef1,form1)
+buildForm(formDef2,form2)
 
 
 
