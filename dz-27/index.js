@@ -216,14 +216,14 @@ else
 
   var input7=form.elements.division;
     var input7Value=input7.value;
-  input7.addEventListener('blur', division) 
+  input7.addEventListener('change', division) 
     function division(EO){
       EO=EO||window.event;
       var input7Value=input7.value;
       var span7 = document.querySelector('.span7');
-    if (input7Value==1) {
+    if (input7Value==3) {
       input7.className = ('invalid');
-      span7.innerHTML ='выберите рубрику'}
+      span7.innerHTML ='бытовая техника отсутствует в рубрике'}
     else {
       input7.className = ('valid');
       span7.innerHTML ='';
@@ -232,7 +232,7 @@ else
 
 var input8=form.elements.payment;
 for(let i of input8){
-i.addEventListener('blur', payment);
+i.addEventListener('change', payment);
 function payment(EO) {
   EO=EO||window.event;
   var span8 = document.querySelector('.span8');
@@ -253,7 +253,7 @@ function payment(EO) {
 
 var input9=form.elements.votes;
     var input9Value=input9.checked;
-    input9.addEventListener('blur',checked);
+    input9.addEventListener('change',checked);
 function checked(EO){
   EO=EO||window.event;
   var span9 = document.querySelector('.span9');
