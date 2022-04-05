@@ -1,39 +1,39 @@
 
 
-    var input1 = form.elements.developers;// находим input1
-    var input1Value=input1.value;// строковое значение input1
-    var input2=form.elements.sitename;// находим input2
-    var input2Value=input2.value;// строковое значение input2
-    var input3=form.elements.siteurl;// находим input3
-    var input3Value=input3.value;// строковое значение input3
-    var input4=form.elements.Website_launch_date;// находим input4
-    var input4Value=input4.value;// строковое значение input4
-    var input5=form.elements.visitors;// находим input5
-    var input5Value=parseInt(input5.value.trim());// числовое значение input5
-    var input6=form.elements.email;// находим input6
-    var input6Value=input6.value;// строковое значение input6
-    var input7=form.elements.division;// находим input7
-    var input7Value=input7.value;// строковое значение input7
-    var input8=form.elements.payment;// находим input8
-    var input8Value=input8.value;// строковое значение input8
-    var input9=form.elements.votes;// находим input9
-    var input9Value=input9.checked;// логическое значение input9
-    var input10=form.elements.description;// находим input10
-    var input10Value=input10.value;// строковое значение input10
-    var span1 = document.querySelector('.span1');
-    var span2 = document.querySelector('.span2');
-    var span3 = document.querySelector('.span3');
-    var span4 = document.querySelector('.span4');
-    var span5 = document.querySelector('.span5');
-    var span6 = document.querySelector('.span6');
-    var span7 = document.querySelector('.span7');
-    var span8 = document.querySelector('.span8');
-    var span9 = document.querySelector('.span9');
-    var span10 = document.querySelector('.span10');
+   // var input1 = form.elements.developers;// находим input1
+   // var input1Value=input1.value;// строковое значение input1
+   // var input2=form.elements.sitename;// находим input2
+   // var input2Value=input2.value;// строковое значение input2
+   // var input3=form.elements.siteurl;// находим input3
+  //  var input3Value=input3.value;// строковое значение input3
+  //  var input4=form.elements.Website_launch_date;// находим input4
+   // var input4Value=input4.value;// строковое значение input4
+   // var input5=form.elements.visitors;// находим input5
+  //  var input5Value=parseInt(input5.value.trim());// числовое значение input5
+  //  var input6=form.elements.email;// находим input6
+   // var input6Value=input6.value;// строковое значение input6
+   // var input7=form.elements.division;// находим input7
+  //  var input7Value=input7.value;// строковое значение input7
+  //  var input8=form.elements.payment;// находим input8
+  //  var input8Value=input8.value;// строковое значение input8
+  //  var input9=form.elements.votes;// находим input9
+  //  var input9Value=input9.checked;// логическое значение input9
+  //  var input10=form.elements.description;// находим input10
+  //  var input10Value=input10.value;// строковое значение input10
+  //  var span1 = document.querySelector('.span1');
+  //  var span2 = document.querySelector('.span2');
+  //  var span3 = document.querySelector('.span3');
+  //  var span4 = document.querySelector('.span4');
+  //  var span5 = document.querySelector('.span5');
+  //  var span6 = document.querySelector('.span6');
+  //  var span7 = document.querySelector('.span7');
+  //  var span8 = document.querySelector('.span8');
+  //  var span9 = document.querySelector('.span9');
+  //  var span10 = document.querySelector('.span10');
 
     
 
-  
+    var form=document.forms.form;
   let input1 = form.elements.developers;
   input1.addEventListener('blur',()=>developers(false));
     function developers(focusOnError){
@@ -42,8 +42,8 @@
       var input1Value=input1.value;
   if(input1Value===""){
       span1.innerHTML ='заполните пустое поле';
-      errCount++;}
-       if(focusOnError){
+      errCount++;
+       if(focusOnError)
       input1.focus();
   }
   else{
@@ -172,25 +172,24 @@ function payment(focusOnError) {
     let errCount=0;
   var span8 = document.querySelector('.span8');
   var input8Value=input8.value;
-  if (i.checked ===true)  {
-    if(i.value==1){
-    span8.innerHTML = 'в данный момент у нас только платное или VIP размещение';
-    document.getElementById('input8').scrollIntoView();
+  if (input8Value==='')  {
+    span8.innerHTML = ' выберите размещение';
+    i.scrollIntoView();
     errCount++;
-  if(focusOnError)
-  input8.scrollIntoView();
-  } 
+   if(focusOnError)
+   i.scrollIntoView();
+  }
   else
   {
     span8.innerHTML=''
   }
-}
+
 return errCount;
 }
 }
 
 var input9=form.elements.votes;
-    var input9Value=input9.checked;
+    
     input9.addEventListener('change',()=>checked(false));
 function checked(focusOnError){
   let errCount=0;
@@ -239,7 +238,9 @@ function validateInfoForm(EO){
     errCount+=visitors(!errCount);
     errCount+=email(!errCount);
     errCount+=division(!errCount);
+    errCount+=checked(!errCount);
     errCount+=payment(!errCount);
+    errCount+=description(!errCount);
     if(errCount)
     EO.preventDefault();
 }
