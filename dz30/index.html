@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=UTF-8>
+    <title>drag&amp;drop</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body style='min-height: 100vh'>
+<img id="saxophone" draggable="true" src='http://fe.it-academy.by/Sites/0000007/sax.jpg'>
+<img id="Yin_Yang" src='http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png' width=100>
+<img id="people" src='http://fe.it-academy.by/Sites/0000007/Man-and-woman.png' width=150>
+<img id="not_smoke" src='http://fe.it-academy.by/Sites/0000007/No_smoking.png' style='padding-left: 50px'>
+
+<script>
+window.addEventListener('load',loading);
+function loading(){
+  let img=document.getElementsByTagName('img');
+  for(let i=0;i<img.length;i++)
+{
+    img[i].style.left=img[i].offsetLeft+"px";
+    img[i].style.top=img[i].offsetTop+"px";
+
+      };
+
+      for(let x=0;x<img.length;x++)
+{
+        img[x].style.position="absolute";
+     
+ };
+
+    }
+
+</script>
+ 
+</body>
+</html>
