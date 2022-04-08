@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=UTF-8>
+    <title>drag&amp;drop</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body style='min-height: 100vh'>
+<img  src='http://fe.it-academy.by/Sites/0000007/sax.jpg'>
+<img  src='http://fe.it-academy.by/Sites/0000007/Yin_and_Yang.png' width=100>
+<img  src='http://fe.it-academy.by/Sites/0000007/Man-and-woman.png' width=150>
+<img  src='http://fe.it-academy.by/Sites/0000007/No_smoking.png' style='padding-left: 50px'>
+
+<script>
+window.addEventListener('load',loading);
+function loading(){
+  let z;
+  let img=document.getElementsByTagName('img');
+  for(let i=0;i<img.length;i++){
+    img[i].style.left=img[i].offsetLeft+"px";
+    img[i].style.top=img[i].offsetTop+"px";
+      };
+      for(let x=0;x<img.length;x++){
+        img[x].style.position="absolute";
+       z=img[x];
+      }
+      for(let element of img){
+        element.addEventListener('mousedown',down); 
+        function down(e) {
+    var coords = getCoords(element);
+    var shiftX = e.pageX - coords.left;
+    var shiftY = e.pageY - coords.top;
+    element.style.position = 'absolute';
+    document.body.appendChild(element);
+    moveAt(e);
+    element.style.zIndex = 10; 
+    
+    
+    function moveAt(e) {
+      element.style.left = e.pageX - shiftX + 'px';
+      element.style.top = e.pageY - shiftY + 'px';
+    }
+    
+    document.addEventListener('mousemove', move);
+    function move(e) {
+      moveAt(e);
+      element.style.cursor='pointer';
+    };
+    
+    element.addEventListener('mouseup', up)
+    function up() {
+      document.removeEventListener('mousemove',move);
+      element.removeEventListener('mouseup',up);
+      element.style.cursor='';
+    };
+    
+    element.addEventListener('dragstart',dragstart )
+    function dragstart(e) {
+      e.preventDefault();
+    };
+    
+    function getCoords(elem) {   //предотвращает прыганье картинки
+    var box = elem.getBoundingClientRect();
+    return {
+      top: box.top-8,
+      left: box.left-8
+  };
+  }
+  }
+  }
+  }
+
+</script>
+</body>
+</html>
