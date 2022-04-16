@@ -44,6 +44,7 @@ if(number>=10){//позиционированиу цифр от 10 до 12
 e.style.left=(green.offsetHeight/2-8)+"px";}//центрирование цифр в зеленых кругах
 angles+=30;
 number+=1;
+
 }
 //секундная стрелка
 let sec=document.createElement("div");
@@ -103,9 +104,13 @@ divTime.style.top=q/6+"px";
 divTime.style.left=(q/2 - 27)+"px";
 divTime.style.zIndex='10';
 }
+updateTime();
 function formatDateHours1(dt) {
 var hours=dt.getHours();
-return   -90+(str0l(hours,2))*30 
+var minutes=dt.getMinutes();
+return   -90+(str0l(hours,2))*30 //положение часовой стрелки без учета положения минутной стрелки(целый час)
++ (360/12 /60 *minutes );// корректировка часовой стрелки с учетом минутной стрелки
+
 }
 function formatDateMin(dt) {
 var minutes=dt.getMinutes();
