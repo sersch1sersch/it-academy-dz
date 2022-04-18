@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="body">
+    
+    <input class="input" type='button' value='Пуск!' onclick='start()'>
+<br /><br />
+<div style='width: 500px; height: 300px;background: yellow;
+    border: solid blue 1px; position: relative;justify-content: space-between; display:flex' >
+    <img src='ball2.png' id='IBall'
+        style='position: absolute'>
+<input class="redDiv" style="position: absolute;left:0px;top:0px;border: solid red 1px;height: 60px;width: 5px;background: red"></input>
+<input class="greenDiv" style="position: absolute;top:0px;left:489px; border: solid green 1px;height: 60px;width: 5px;background:green"></input>
+</div>
+
+<script>
+
+    "use strict";
+    let tops =0;
+let body=document.querySelector('.body');
+    let reddiv= document.querySelector('.redDiv');
+let greendiv= document.querySelector('.greenDiv');
+let input=document.querySelector('.input');
+body.addEventListener("keydown", (a) => {
+  if (a.key === 'ArrowDown'){
+tops++;
+reddiv.style.top=tops+"px";
+}
+if (a.key === 'ArrowUp'){
+tops--;
+reddiv.style.top=tops+"px";
+}
+if (a.key === 'z'){
+tops++;
+greendiv.style.top=tops+"px";
+}
+if (a.key === 'a'){
+tops--;
+greendiv.style.top=tops+"px";
+}
+})
+let topss=0;
+body.addEventListener("keydown", (a) => {
+if (a.key === 'z'){
+topss++;
+greendiv.style.top=topss+"px";
+}
+if (a.key === 'a'){
+topss--;
+greendiv.style.top=topss+"px";
+}
+})
+    var ballH={
+        posX : 220,
+        posY : 120,
+        speedX : 2,
+        speedY : 1,
+        width : 50,
+        height: 50,
+
+       update : function() {
+           var ballElem=document.getElementById('IBall');
+           ballElem.style.left=this.posX+"px";
+          ballElem.style.top=this.posY+"px";
+        }
+   }
+   var redDivH={
+        width : 60,
+        height : 5
+    }
+    var greenDivH={
+        width : 60,
+        height : 5
+    }
+   var areaH={
+        width : 500,
+        height : 300
+    }
+
+    function start() {
+        // плавное движение - от 25 кадр/сек
+        setInterval(tick,40);
+    }
+
+
+
+    
+    function tick() {
+
+        ballH.posX+=ballH.speedX;
+   //      вылетел ли мяч правее стены?
+        if ( ballH.posX+ballH.width>areaH.width ) {
+            ballH.speedX=-ballH.speedX;
+            ballH.posX=areaH.width-ballH.width;
+        }
+      //   вылетел ли мяч левее стены?
+        if ( ballH.posX<0 ) {
+            ballH.speedX=-ballH.speedX;
+            ballH.posX=0;
+        }
+
+        ballH.posY+=ballH.speedY;
+      //   вылетел ли мяч ниже пола?
+        if ( ballH.posY+ballH.height>areaH.height ) {
+            ballH.speedY=-ballH.speedY;
+            ballH.posY=areaH.height-ballH.height;
+        }
+      //   вылетел ли мяч выше потолка?
+        if ( ballH.posY<0 ) {
+            ballH.speedY=-ballH.speedY;
+            ballH.posY=0;
+        }
+
+        ballH.update();
+    }
+
+    ballH.update();
+
+</script>
+
+</body>
+</html>
