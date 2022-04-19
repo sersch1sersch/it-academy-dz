@@ -8,53 +8,31 @@
 </head>
 <body class="body">
     
-    <input class="input" type='button' value='Пуск!' onclick='start()'>
+    <input class="inputRed" type='button' value='Пуск!' onclick='start()'>
 <br /><br />
+<div style="text-align: center;"><input  class="input" type='text' value='0' style="width: 50px;border: solid blue 2px; border-radius: 20px;box-shadow:0px 2px 12px 2px rgba(19, 20, 20, 0.4);">
+    <input class="inputGreen" type='text' value='0' style="width: 50px;border: solid blue 2px; border-radius: 20px;box-shadow:0px 2px 12px 2px rgba(19, 20, 20, 0.4);">
+</div>
+<br />
 <div style='width: 500px; height: 300px;background: yellow;
     border: solid blue 1px; position: relative;justify-content: space-between; display:flex' >
     <img src='ball2.png' id='IBall'
         style='position: absolute'>
-<input class="redDiv" style="position: absolute;left:0px;top:0px;border: solid red 1px;height: 60px;width: 5px;background: red"></input>
+<input class="redDiv" style="position: absolute;left:px;top:0px;border: solid red 1px;height: 60px;width: 5px;background: red"></input>
 <input class="greenDiv" style="position: absolute;top:0px;left:489px; border: solid green 1px;height: 60px;width: 5px;background:green"></input>
 </div>
-
 <script>
-
     "use strict";
-    let tops =0;
-let body=document.querySelector('.body');
-    let reddiv= document.querySelector('.redDiv');
-let greendiv= document.querySelector('.greenDiv');
-let input=document.querySelector('.input');
-body.addEventListener("keydown", (a) => {
-  if (a.key === 'ArrowDown'){
-tops++;
-reddiv.style.top=tops+"px";
-}
-if (a.key === 'ArrowUp'){
-tops--;
-reddiv.style.top=tops+"px";
-}
-if (a.key === 'z'){
-tops++;
-greendiv.style.top=tops+"px";
-}
-if (a.key === 'a'){
-tops--;
-greendiv.style.top=tops+"px";
-}
-})
-let topss=0;
-body.addEventListener("keydown", (a) => {
-if (a.key === 'z'){
-topss++;
-greendiv.style.top=topss+"px";
-}
-if (a.key === 'a'){
-topss--;
-greendiv.style.top=topss+"px";
-}
-})
+    let body=document.querySelector('.body');  
+    let inputRed=document.querySelector('.inputRed'); 
+    let inputGreen=document.querySelector('.inputGreen');
+    let namber1=inputRed.value;
+    let namber2=inputGreen.value;
+    inputGreen
+    let yRed=0;
+    let speedYRed=0; 
+    let yGreen=0;
+    let speedYGreen=0; 
     var ballH={
         posX : 220,
         posY : 120,
@@ -62,65 +40,91 @@ greendiv.style.top=topss+"px";
         speedY : 1,
         width : 50,
         height: 50,
-
        update : function() {
            var ballElem=document.getElementById('IBall');
            ballElem.style.left=this.posX+"px";
           ballElem.style.top=this.posY+"px";
         }
    }
-   var redDivH={
-        width : 60,
-        height : 5
-    }
-    var greenDivH={
-        width : 60,
-        height : 5
-    }
    var areaH={
         width : 500,
         height : 300
     }
-
+    var greenDivH={
+        width : 489,
+        height : 0
+    }
+    var redDivH={
+        width : 11,
+        height : 0
+    }
     function start() {
         // плавное движение - от 25 кадр/сек
-        setInterval(tick,40);
+       setInterval(tick,40);
+       
     }
-
-
-
-    
     function tick() {
-
+       yRed+=speedYRed;
+       yGreen+=speedYGreen;
+       let reddiv= document.querySelector('.redDiv');
+            reddiv.style.top=yRed+"px";
+            let greendiv= document.querySelector('.greenDiv');
+            greendiv.style.top=yGreen+"px";
+body.addEventListener("keydown", (a) => {
+  if (a.key === 'ArrowDown')
+  speedYGreen=3
+    if (a.key === 'ArrowUp')
+    speedYGreen=-3
+    if (a.key === 'z')
+      speedYRed=3
+    if (a.key === 'a')
+     speedYRed=-3
+})
+body.addEventListener("keyup", (a) => {
+  if (a.key === 'ArrowDown')
+  speedYGreen=0
+   if (a.key === 'ArrowUp')
+   speedYGreen=0
+    if (a.key === 'a')
+    speedYRed=0
+   if (a.key === 'z')
+     speedYRed=0
+})
         ballH.posX+=ballH.speedX;
    //      вылетел ли мяч правее стены?
         if ( ballH.posX+ballH.width>areaH.width ) {
-            ballH.speedX=-ballH.speedX;
+            ballH.speedX=0;            
+            namber1+=1
             ballH.posX=areaH.width-ballH.width;
         }
-      //   вылетел ли мяч левее стены?
+        if ( ballH.posX+ballH.width>greenDivH.width ) {
+            ballH.speedX=-ballH.speedX;
+            ballH.posX=greenDivH.width-ballH.width;
+        }
+        // вылетел ли мяч левее стены?
         if ( ballH.posX<0 ) {
             ballH.speedX=-ballH.speedX;
+            namber2+=1
             ballH.posX=0;
         }
-
+       // if ( ballH.posX<redDivH.width ) {
+      //      ballH.speedX=-ballH.speedX;
+      //      ballH.posX=redDivH.width;
+      //  }
         ballH.posY+=ballH.speedY;
       //   вылетел ли мяч ниже пола?
         if ( ballH.posY+ballH.height>areaH.height ) {
-            ballH.speedY=-ballH.speedY;
+            ballH.speedY=-ballH.speedY;;
             ballH.posY=areaH.height-ballH.height;
-        }
+        } 
       //   вылетел ли мяч выше потолка?
         if ( ballH.posY<0 ) {
             ballH.speedY=-ballH.speedY;
             ballH.posY=0;
         }
-
         ballH.update();
     }
-
     ballH.update();
-
 </script>
 
 </body>
