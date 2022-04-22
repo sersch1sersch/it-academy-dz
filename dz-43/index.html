@@ -19,8 +19,8 @@
     border: solid blue 1px; position: relative;justify-content: space-between;' >
     <img src='ball2.png' id='IBall'
         style='position: absolute'>
-<input class="redDiv" style="position: absolute;left:px;top:0px;border: solid red 0px;height: 60px;width: 5px;background: red"></input>
-<input class="greenDiv" style="position: absolute;top:0px;left:492px; border: solid green 0px;height: 60px;width: 5px;background:green"></input>
+<input class="redDiv" style="position: absolute;left:px;top:150px;border: solid red 0px;height: 60px;width: 5px;background: red"></input>
+<input class="greenDiv" style="position: absolute;top:150px;left:492px; border: solid green 0px;height: 60px;width: 5px;background:green"></input>
 </div>
 <script>
     "use strict";
@@ -35,10 +35,6 @@
     let yGreen=0;
     let speedYGreen=0; 
     var ballH={
-      //  posX : 220,
-      //  posY : 120,
-      //  speedX : 2,
-     //   speedY : 1,
         width : 50,
         height: 50,
         radius:25,
@@ -83,23 +79,33 @@ body.addEventListener("keyup", (a) => {
 let igra=0;//начало игры
 //let igra=1;//идет игра
 //let igra=2;//засчитан гол и мяч застыл
+yGreen=120;
+yRed=120;
 ballH.speedX=0;
 ballH.speedY=0;
 ballH.posX=225;
 ballH.posY=125;
+function randomDiap(n,m) {
+  return Math.floor(
+    Math.random()*(m-n+1)
+    )+n;
+}
 setInterval(tick,40);
     function start() {
+        let angles=[randomDiap(65,80),randomDiap(100,130), randomDiap(-65,-80),randomDiap(-100,-130)];
+var randomIndex = Math.floor(Math.random() * 4);
+var angle=parseFloat(angles[randomIndex])/180*Math.PI;
         if(igra===0){
             igra=1;
-    ballH.speedX=5;
-    ballH.speedY=5;
+    ballH.speedX=6*Math.sin(angle);
+    ballH.speedY=6*Math.cos(angle);
         }
         if(igra===2){
     ballH.posY=125;
     ballH.posX=225;
     igra=1;
-    ballH.speedX=5;
-    ballH.speedY=5;
+    ballH.speedX=6*Math.sin(angle);
+    ballH.speedY=6*Math.cos(angle);
 }
     }
     function tick() {
