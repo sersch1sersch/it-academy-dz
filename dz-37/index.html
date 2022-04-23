@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clock_dom</title>
+    <title>cfff</title>
     <style>
-    body{
-      margin:0px;
-      padding: 0px;
-    }
+    
     </style>
 </head>
 <body class="body">
@@ -31,12 +28,9 @@ button.addEventListener("click",pos)
   var q=form.elements.Radius.value;//коэффициент размера часов
 var svg=document.createElement('svg');
 var circle=document.createElement('circle');
-svg.style.width='800px';
-svg.style.height='800px';
-svg.style.backgroundColor="blue";
 svg.style.border="solid green 3px";
-svg.setAttribute('width','600px');
-svg.setAttribute('height','600px');
+svg.setAttribute('width',600);
+svg.setAttribute('height',600);
 circle.setAttribute('cx',100);
 circle.setAttribute('cy',100);
 circle.setAttribute('r',100);
@@ -44,6 +38,7 @@ circle.style.fill="red";
 svg.appendChild(circle);
 body.appendChild(svg)
   }
+  
 </script>
    <script src="index.js"></script>
 </body>
