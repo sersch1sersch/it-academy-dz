@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock_dom</title>
+    <style>
+    body{
+      margin:0px;
+      padding: 0px;
+    }
+    </style>
+</head>
+<body class="body">
+    <div class="divs">
+    <form name=FPos>
+    размер часов: <input type=text name=Radius value='400'><br />
+    <button class="button" type=button value='позиционировать'>создать часы
+    </form>
+    </div>
+<script>
+    "use strict";
+let button=document.querySelector('.button');
+button.addEventListener("click",pos)
+  function pos( ) {
+    let body=document.querySelector('.body');
+  let divForm=document.querySelector('.divs') ;
+  divForm.style.display="none"
+  var form=document.forms.FPos;
+  var q=form.elements.Radius.value;//коэффициент размера часов
+var svg=document.createElement('svg');
+var circle=document.createElement('circle');
+svg.style.width='800px';
+svg.style.height='800px';
+svg.style.backgroundColor="blue";
+svg.style.border="solid green 3px";
+circle.setAttribute=('cx',100);
+circle.setAttribute=('cy',100);
+circle.setAttribute=('r',100);
+circle.style.fill="red";
+svg.appendChild(circle);
+body.appendChild(svg)
+  }
+</script>
+   <script src="index.js"></script>
+</body>
+</html>
