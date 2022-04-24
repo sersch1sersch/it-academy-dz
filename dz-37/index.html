@@ -5,9 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cfff</title>
-    <style>
-    
-    </style>
 </head>
 <body class="body">
     <div class="divs">
@@ -25,20 +22,164 @@ button.addEventListener("click",pos)
   let divForm=document.querySelector('.divs') ;
   divForm.style.display="none"
   var form=document.forms.FPos;
-  var q=form.elements.Radius.value;//коэффициент размера часов
-var svg=document.createElement('svg');
-var circle=document.createElement('circle');
-svg.style.border="solid green 3px";
-svg.setAttribute('width',600);
-svg.setAttribute('height',600);
-circle.setAttribute('cx',100);
-circle.setAttribute('cy',100);
-circle.setAttribute('r',100);
+  var q=form.elements.Radius.value;
+  var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svg.setAttribute("width",800);
+svg.setAttribute("height",800);
+svg.style.position="absolute";
+var circle=document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+circle.setAttribute("cx",q/2);
+circle.setAttribute("cy",q/2);
+circle.setAttribute("r",q/2);
 circle.style.fill="red";
 svg.appendChild(circle);
-body.appendChild(svg)
-  }
-  
+document.body.appendChild(svg)
+let redX=q/2;//центры красного
+let redY=q/2;//центры красного
+let redR=q/2;
+let angles=30;//угол, корректировка для позиционирования первого зеленого круга
+let number=1; //цифры в зеленых кругах, начало с первого круга при angles=30
+for(let i=0;i<12;i++){
+var radius=parseFloat(q/2.5);
+let green=document.createElementNS('http://www.w3.org/2000/svg', 'circle');//создаем зеленый круг
+green.style.backgroundColor="green";
+green.style.position="absolute";
+let e=document.createElement('div');//создаем div с цифрами в зеленых кругах
+e.textContent=number;
+e.style.position="absolute";
+e.style.zIndex="13";
+document.body.appendChild(e);
+svg.appendChild(green);
+var angle=parseFloat(angles)/180*Math.PI;
+green.setAttribute("r",q/15);
+green.style.fill="green";
+green.style.zIndex="10";
+var greenCenterX=redX+radius*Math.sin(angle);
+let greenX=Math.round(greenCenterX);
+green.setAttribute("cx",greenX);
+var greenCenterY=redY-radius*Math.cos(angle);
+let greenY=Math.round(greenCenterY);
+green.setAttribute("cy",greenY);
+e.style.fontSize=18+"px"
+e.style.top=(greenY)+"px";//центрирование цифр в зеленых кругах
+e.style.left=(greenX+4)+"px";//центрирование цифр в зеленых кругах
+if(number>=10){//позиционирование цифр от 10 до 12,центрирование цифр в зеленых кругах
+e.style.left=greenX+"px";
+}
+if(q<400){
+  e.style.fontSize=10+"px"
+  e.style.top=(greenY+3)+"px";//центрирование цифр в зеленых кругах
+e.style.left=(greenX+6)+"px";//центрирование цифр в зеленых кругах
+}
+if(q<400&&number>=10){
+  e.style.fontSize=10+"px"
+  e.style.top=(greenY+3)+"px";//центрирование цифр в зеленых кругах
+e.style.left=(greenX+3)+"px";//центрирование цифр в зеленых кругах
+}
+if(q>400){
+  e.style.fontSize=22+"px"
+  e.style.top=(greenY-4)+"px";//центрирование цифр в зеленых кругах
+e.style.left=(greenX+4)+"px";//центрирование цифр в зеленых кругах
+}
+if(q>400&&number>=10){
+  e.style.fontSize=22+"px"
+  e.style.top=(greenY-5)+"px";//центрирование цифр в зеленых кругах
+e.style.left=(greenX-2)+"px";//центрирование цифр в зеленых кругах
+}
+if(q>600&&number>=10){
+  e.style.fontSize=30+"px"
+  e.style.top=(greenY-7)+"px";//центрирование цифр в зеленых кругах
+e.style.left=(greenX-5)+"px";//центрирование цифр в зеленых кругах
+}
+angles+=30;
+number+=1;
+}
+//секундная стрелка
+let sec=document.createElement("div");
+sec.className="sec";
+sec.style.width=q/2.2+"px";
+sec.style.height="1px";
+sec.style.position="absolute";
+sec.style.backgroundColor="black";
+sec.style.top=redX+"px";
+sec.style.left=redY+"px";
+sec.style.transformOrigin=" 0 0 ";
+sec.style.zIndex="15";
+body.appendChild(sec)
+//минутная стрелка
+let min=document.createElement("div");
+min.style.width=q/3+"px";
+min.style.height="3px";
+min.style.position="absolute";
+min.style.backgroundColor="black";
+min.style.top=redX+"px";
+min.style.left=redY+"px";
+min.style.transformOrigin=" 0 0 ";
+min.style.zIndex="15";
+min.style.borderRadius="30%"
+body.appendChild(min)
+//часовая стрелка
+let hours1=document.createElement("div");
+hours1.className="hours1";
+hours1.style.width=q/5+"px";
+hours1.style.height="6px";
+hours1.style.position="absolute";
+hours1.style.backgroundColor="black";
+hours1.style.top=redX+"px";
+hours1.style.left=redY+"px";
+hours1.style.borderRadius="30%"
+hours1.style.transformOrigin=" 1px 2px ";
+hours1.style.zIndex="15";
+body.appendChild(hours1)
+setInterval(updateTime,1000);
+let divTime=document.createElement("div");
+divTime.className="time"
+body.appendChild(divTime);
+function updateTime() {
+var currTime=new Date();
+var currTimeStr=formatDateTime(currTime);
+let secTime=formatDateSec(currTime);//привязка времени к секундной стрелке
+let minTime = formatDateMin(currTime);//привязка времени к минутной стрелке
+let hours1Time = formatDateHours1(currTime);//привязка времени к часовой стрелке
+hours1.style.transform="rotate("+ hours1Time + "deg)";
+sec.style.transform="rotate("+ secTime + "deg)";
+min.style.transform="rotate("+ minTime + "deg)";
+divTime.innerHTML=currTimeStr;
+divTime.style.position="absolute";
+divTime.style.top=q/4.8+"px";
+divTime.style.left=(q/2.31)+"px";
+divTime.style.zIndex='10';
+divTime.style.fontSize=q/20+"px";
+}
+updateTime();
+function formatDateHours1(dt) {
+var hours=dt.getHours();
+var minutes=dt.getMinutes();
+return   -90+(str0l(hours,2))*30 //положение часовой стрелки без учета положения минутной стрелки(целый час)
++ (360/12 /60 *minutes );// корректировка часовой стрелки с учетом минутной стрелки
+}
+function formatDateMin(dt) {
+var minutes=dt.getMinutes();
+return  -90+(str0l(minutes,2))*6;
+}
+function formatDateSec(dt) {
+var seconds=dt.getSeconds();
+return  -90+(str0l(seconds,2))*6;
+}
+function formatDateTime(dt) {
+var hours=dt.getHours();
+var minutes=dt.getMinutes();
+var seconds=dt.getSeconds();
+console.log(str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2));
+return   str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
+} 
+function str0l(val,len) {
+var strVal=val.toString();
+while ( strVal.length < len )
+    strVal='0'+strVal;
+return strVal;
+}
+}
 </script>
    <script src="index.js"></script>
 </body>
