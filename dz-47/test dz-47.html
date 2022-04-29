@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  body{
+    margin:0px;
+    padding: 0px;
+  }
+</style>
+<body class="body">
+<script>
+
+let button=document.createElement("button");//кнопка пуск
+button.textContent="Start";
+button.style.width=50+"px";
+button.style.height=20+"px";
+
+let div=document.createElement("div");//div -start
+document.body.appendChild(div);
+div.appendChild(button);
+div.style.textAlign="center"
+div.style.marginTop=30+"px";
+
+let div2=document.createElement("div");//div number
+document.body.appendChild(div2);
+div2.style.textAlign="center"
+div2.style.marginTop=30+"px";
+let input1=document.createElement("input");//счет красного
+input1.style.width=30+"px"
+input1.value="0";
+input1.style.textAlign="center";
+div2.appendChild(input1);
+let div3=document.createElement("div");
+div2.appendChild(div3);
+div3.textContent=":"
+div3.style.display="inline-block"
+let input2=document.createElement("input");//счет зеленого
+input2.style.width=30+"px";
+input2.value="0";
+input2.style.textAlign="center";
+div2.appendChild(input2);
+
+var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');//игровое поле
+svg.setAttribute("width",500);
+svg.setAttribute("height",300);
+svg.style.position="absolute";
+svg.style.backgroundColor="yellow";
+svg.style.marginTop=30+"px";
+svg.style.border="solid black 2px";
+document.body.appendChild(svg);
+
+var svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');//красная ракетка
+svg1.className="redDiv";
+svg1.style.position="absolute";
+svg1.style.left=2+"px";
+svg1.style.top=250+"px";
+svg1.style.border="solid red 0px";
+svg1.style.height=60+"px";
+svg1.style.width=8+"px";
+svg1.style.background="red";
+var svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');//зеленая ракетка
+svg2.className="greenDiv";
+svg2.setAttribute("style","position: absolute;top:250px;left:494px; border: solid green 0px;height: 60px;width: 8px;background:green")
+document.body.appendChild(svg1);
+document.body.appendChild(svg2);
+
+let div4=document.createElement("div");//мяч
+div4.style.borderRadius="50%";
+div4.style.position="absolute";
+div4.style.width=30+"px";
+div4.style.height=30+"px";
+div4.style.backgroundColor="blue";
+div4.id="IBall"
+document.body.appendChild(div4);
+
+let inputRed=input1;
+let inputGreen=input2;
+let namber2=0;
+    let namber1=0;
+    let yRed=0;
+    let speedYRed=0; 
+    let yGreen=0;
+    let speedYGreen=0; 
+    var ballH={
+        width : 30,
+        height: 30,
+        radius: 15,
+       update : function() {
+           var ballElem=document.getElementById('IBall');
+           ballElem.style.left=this.posX+"px";
+          ballElem.style.top=this.posY+"px";
+        }
+   }
+   var areaH={
+        width : 500,
+        height : 433
+    }
+    var greenDivH={
+        width : 493,
+        height : 60
+    }
+    var redDivH={
+        width : 7,
+        height : 60
+    }
+    document.body.addEventListener("keydown", (a) => {
+  if (a.key === 'ArrowDown')
+  speedYGreen=4
+    if (a.key === 'ArrowUp')
+    speedYGreen=-4
+    if (a.key === 'z')
+      speedYRed=4
+    if (a.key === 'a')
+     speedYRed=-4
+})
+document.body.addEventListener("keyup", (a) => {
+  if (a.key === 'ArrowDown')
+  speedYGreen=0
+   if (a.key === 'ArrowUp')
+   speedYGreen=0
+    if (a.key === 'a')
+    speedYRed=0
+   if (a.key === 'z')
+     speedYRed=0
+})
+let igra=0;//начало игры
+//let igra=1;//идет игра
+//let igra=2;//засчитан гол и мяч застыл
+yGreen=250;
+yRed=250;
+ballH.speedX=0;
+ballH.speedY=0;
+ballH.posX=235;
+ballH.posY=266;
+function randomDiap(n,m) {
+  return Math.floor(
+    Math.random()*(m-n+1)
+    )+n;
+}
+setInterval(tick,40);
+button.addEventListener("click",start)
+    function start() {
+        let angles=[randomDiap(65,80),randomDiap(100,130), randomDiap(-65,-80),randomDiap(-100,-130)];
+var randomIndex = Math.floor(Math.random() * 4);
+var angle=parseFloat(angles[randomIndex])/180*Math.PI;
+        if(igra===0){
+            igra=1;
+    ballH.speedX=6*Math.sin(angle);
+    ballH.speedY=6*Math.cos(angle);
+        }
+        if(igra===2){
+    ballH.posY=265;
+    ballH.posX=235;
+    igra=1;
+    ballH.speedX=6*Math.sin(angle);
+    ballH.speedY=6*Math.cos(angle);
+}
+    }
+    function tick() {
+        
+    ballH.posX+=ballH.speedX;
+    ballH.posY+=ballH.speedY;
+        yRed+=speedYRed;
+       yGreen+=speedYGreen;
+       //let reddiv= document.querySelector('.redDiv');
+            svg1.style.top=yRed+"px";
+           // let greendiv= document.querySelector('.greenDiv');
+            svg2.style.top=yGreen+"px";
+            if(yGreen<132){
+                yGreen=132;
+            };
+            if(yGreen>=371){
+                yGreen=371;
+            };
+            if(yRed<132){
+                yRed=132;
+            };
+            if(yRed>=371){
+                yRed=371;
+            };
+if ( ballH.posX+30>areaH.width && igra===1) {// вылетел ли мяч правее стены?
+    ballH.speedX=0;
+    ballH.speedY=0;
+    namber1++;
+    inputGreen.value=namber1;
+    igra=2;
+}
+if ( ballH.posY+ballH.radius>=yGreen && ballH.posY+ballH.radius<=yGreen+greenDivH.height && ballH.posX+ballH.width>=greenDivH.width) {
+    ballH.speedX=-ballH.speedX;
+   //проверка на отбитие мяча зеленой ракеткой
+}
+if ( ballH.posY+ballH.radius>=yRed && ballH.posY+ballH.radius<=yRed+redDivH.height && ballH.posX<=redDivH.width) {
+    ballH.speedX=-ballH.speedX;   
+    //проверка на отбитие мяча красной ракеткой
+}
+if ( ballH.posX<0 && igra===1) {// вылетел ли мяч левее стены?
+    ballH.speedX=0;
+    ballH.speedY=0;
+    ballH.posX=0;
+    namber2++;
+    inputRed.value=namber2;
+    igra=2;
+}
+if ( ballH.posY+ballH.height>areaH.height ) {// вылетел ли мяч ниже пола?
+    ballH.speedY=-ballH.speedY;
+    ballH.posY=areaH.height-ballH.height;
+}
+if ( ballH.posY<132 ) {// вылетел ли мяч выше потолка?
+    ballH.speedY=-ballH.speedY;
+    ballH.posY=132;
+}
+ballH.update();
+}
+ballH.update();
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+    <script src="index.js"></script>
+</body>
+</html>
