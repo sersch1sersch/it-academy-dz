@@ -48,35 +48,50 @@ div2.appendChild(input2);
 var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');//игровое поле
 svg.setAttribute("width",500);
 svg.setAttribute("height",300);
-svg.style.position="absolute";
-svg.style.backgroundColor="yellow";
-svg.style.marginTop=30+"px";
 svg.style.border="solid black 2px";
+svg.style.marginTop=30+"px";
+let pole=document.createElementNS('http://www.w3.org/2000/svg','rect')
+pole.setAttribute("width",500);
+pole.setAttribute("height",300);
+pole.style.position="absolute";
+pole.setAttribute("fill","yellow");
 document.body.appendChild(svg);
+svg.appendChild(pole);
 
-var svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');//красная ракетка
-svg1.className="redDiv";
-svg1.style.position="absolute";
-svg1.style.left=2+"px";
-svg1.style.top=250+"px";
-svg1.style.border="solid red 0px";
-svg1.style.height=60+"px";
-svg1.style.width=8+"px";
-svg1.style.background="red";
-var svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');//зеленая ракетка
-svg2.className="greenDiv";
-svg2.setAttribute("style","position: absolute;top:250px;left:494px; border: solid green 0px;height: 60px;width: 8px;background:green")
-document.body.appendChild(svg1);
-document.body.appendChild(svg2);
 
-let div4=document.createElement("div");//мяч
-div4.style.borderRadius="50%";
-div4.style.position="absolute";
-div4.style.width=30+"px";
-div4.style.height=30+"px";
-div4.style.backgroundColor="blue";
-div4.id="IBall"
-document.body.appendChild(div4);
+
+
+
+var rectRed = document.createElementNS('http://www.w3.org/2000/svg','rect');//красная ракетка
+rectRed.className="redDiv";
+rectRed.setAttribute("x", 0)
+rectRed.setAttribute("y", 125)
+rectRed.setAttribute("width",9);
+rectRed.setAttribute("height",60);
+rectRed.setAttribute("fill","red");
+rectRed.style.position="absolute";
+var rectGreen = document.createElementNS('http://www.w3.org/2000/svg', 'rect');//зеленая ракетка
+rectGreen.className="greenDiv";
+rectGreen.setAttribute("x", 492)
+rectGreen.setAttribute("y", 125)
+rectGreen.setAttribute("width",9);
+rectGreen.setAttribute("height",60);
+rectGreen.setAttribute("fill","green");
+rectGreen.style.position="absolute";
+svg.appendChild(rectRed);
+svg.appendChild(rectGreen);
+
+var ball = document.createElementNS('http://www.w3.org/2000/svg', 'circle');//мяч
+ball.className="ball";
+ball.setAttribute("cx", 250)
+ball.setAttribute("cy", 150)
+ball.setAttribute("r",15);
+ball.setAttribute("fill","blue");
+ball.style.position="absolute";
+
+ball.id="IBall";
+svg.appendChild(ball);
+
 
 let inputRed=input1;
 let inputGreen=input2;
@@ -92,20 +107,21 @@ let namber2=0;
         radius: 15,
        update : function() {
            var ballElem=document.getElementById('IBall');
-           ballElem.style.left=this.posX+"px";
-          ballElem.style.top=this.posY+"px";
+           ballElem.setAttribute("cx",this.posX+"px");
+           ballElem.setAttribute("cy",this.posY+"px");
+          
         }
    }
    var areaH={
         width : 500,
-        height : 433
+        height : 300
     }
     var greenDivH={
-        width : 493,
+        width : 491,
         height : 60
     }
     var redDivH={
-        width : 7,
+        width : 9,
         height : 60
     }
     document.body.addEventListener("keydown", (a) => {
@@ -131,12 +147,12 @@ document.body.addEventListener("keyup", (a) => {
 let igra=0;//начало игры
 //let igra=1;//идет игра
 //let igra=2;//засчитан гол и мяч застыл
-yGreen=250;
-yRed=250;
+yGreen=125;
+yRed=125;
 ballH.speedX=0;
 ballH.speedY=0;
-ballH.posX=235;
-ballH.posY=266;
+ballH.posX=250;
+ballH.posY=150;
 function randomDiap(n,m) {
   return Math.floor(
     Math.random()*(m-n+1)
@@ -151,11 +167,12 @@ var angle=parseFloat(angles[randomIndex])/180*Math.PI;
         if(igra===0){
             igra=1;
     ballH.speedX=6*Math.sin(angle);
+    
     ballH.speedY=6*Math.cos(angle);
         }
         if(igra===2){
-    ballH.posY=265;
-    ballH.posX=235;
+    ballH.posY=150;
+    ballH.posX=250;
     igra=1;
     ballH.speedX=6*Math.sin(angle);
     ballH.speedY=6*Math.cos(angle);
@@ -164,55 +181,56 @@ var angle=parseFloat(angles[randomIndex])/180*Math.PI;
     function tick() {
         
     ballH.posX+=ballH.speedX;
+    
     ballH.posY+=ballH.speedY;
         yRed+=speedYRed;
        yGreen+=speedYGreen;
        //let reddiv= document.querySelector('.redDiv');
-            svg1.style.top=yRed+"px";
+       rectRed.setAttribute("y",yRed);
            // let greendiv= document.querySelector('.greenDiv');
-            svg2.style.top=yGreen+"px";
-            if(yGreen<132){
-                yGreen=132;
+           rectGreen.setAttribute("y",yGreen);
+            if(yGreen<0){
+                yGreen=0;
             };
-            if(yGreen>=371){
-                yGreen=371;
+            if(yGreen>=241){
+                yGreen=241;
             };
-            if(yRed<132){
-                yRed=132;
+            if(yRed<0){
+                yRed=0;
             };
-            if(yRed>=371){
-                yRed=371;
+            if(yRed>=241){
+                yRed=241;
             };
-if ( ballH.posX+30>areaH.width && igra===1) {// вылетел ли мяч правее стены?
+if ( ballH.posX+ballH.radius>=areaH.width && igra===1) {// вылетел ли мяч правее стены?
     ballH.speedX=0;
     ballH.speedY=0;
     namber1++;
     inputGreen.value=namber1;
     igra=2;
 }
-if ( ballH.posY+ballH.radius>=yGreen && ballH.posY+ballH.radius<=yGreen+greenDivH.height && ballH.posX+ballH.width>=greenDivH.width) {
+if ( ballH.posY>=yGreen && ballH.posY<=yGreen+greenDivH.height && ballH.posX+ballH.radius>=greenDivH.width) {
     ballH.speedX=-ballH.speedX;
    //проверка на отбитие мяча зеленой ракеткой
 }
-if ( ballH.posY+ballH.radius>=yRed && ballH.posY+ballH.radius<=yRed+redDivH.height && ballH.posX<=redDivH.width) {
+if ( ballH.posY>=yRed && ballH.posY<=yRed+redDivH.height && ballH.posX-ballH.radius<=redDivH.width) {
     ballH.speedX=-ballH.speedX;   
     //проверка на отбитие мяча красной ракеткой
 }
-if ( ballH.posX<0 && igra===1) {// вылетел ли мяч левее стены?
+if ( ballH.posX-ballH.radius<=0 && igra===1) {// вылетел ли мяч левее стены?
     ballH.speedX=0;
     ballH.speedY=0;
-    ballH.posX=0;
+    ballH.posX=ballH.radius;
     namber2++;
     inputRed.value=namber2;
     igra=2;
 }
-if ( ballH.posY+ballH.height>areaH.height ) {// вылетел ли мяч ниже пола?
+if ( ballH.posY+ballH.radius>areaH.height ) {// вылетел ли мяч ниже пола?
     ballH.speedY=-ballH.speedY;
-    ballH.posY=areaH.height-ballH.height;
+   // ballH.posY=areaH.height-ballH.height;
 }
-if ( ballH.posY<132 ) {// вылетел ли мяч выше потолка?
+if ( ballH.posY-ballH.radius<=0 ) {// вылетел ли мяч выше потолка?
     ballH.speedY=-ballH.speedY;
-    ballH.posY=132;
+    ballH.posY=ballH.radius;
 }
 ballH.update();
 }

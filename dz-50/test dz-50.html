@@ -97,14 +97,13 @@ function randomDiap(n,m) {
     Math.random()*(m-n+1)
     )+n;
 }
-    var contextRed=canvas1.getContext('2d');//красная ракетка
+var contextRed=canvas1.getContext('2d');//красная ракетка
   contextRed.fillStyle='red';
   contextRed.fillRect(0,yRed,redDivH.width,redDivH.height);
   var contextGreen=canvas1.getContext('2d');//зеленая ракетка
   contextGreen.fillStyle='green';
   contextGreen.fillRect(490,yGreen,greenDivH.width,greenDivH.height);
   var contextBoll=canvas1.getContext('2d');//мяч
-  
   contextBoll.beginPath();//мяч
   contextBoll.arc(ballH.posX,ballH.posY, ballH.radius, 0,Math.PI*2, false);
   contextBoll.fillStyle='blue';
@@ -157,23 +156,23 @@ var angle=parseFloat(angles[randomIndex])/180*Math.PI;
     ballH.posY+=ballH.speedY;
         yRed+=speedYRed;
        yGreen+=speedYGreen;
-      
-       //let reddiv= document.querySelector('.redDiv');
-           // svg1.style.top=yRed+"px";
-           // let greendiv= document.querySelector('.greenDiv');
-           // svg2.style.top=yGreen+"px";
-            if(yGreen<132){
-                yGreen=132;
+       contextGreen.fillStyle='green';
+  contextGreen.fillRect(490,yGreen,greenDivH.width,greenDivH.height);
+            if(yGreen<0){
+                yGreen=0;
             };
-            if(yGreen>=371){
-                yGreen=371;
+            if(yGreen>=240){
+                yGreen=240;
             };
-            if(yRed<132){
-                yRed=132;
+            if(yRed<0){
+                yRed=0;
             };
-            if(yRed>=371){
-                yRed=371;
+            if(yRed>=240){
+                yRed=240;
             };
+          
+       
+    
 if ( ballH.posX+30>areaH.width && igra===1) {// вылетел ли мяч правее стены?
     ballH.speedX=0;
     ballH.speedY=0;
