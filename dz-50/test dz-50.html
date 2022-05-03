@@ -76,11 +76,11 @@ let namber2=0;
         height : 300
     }
     var greenDivH={
-        width : 491,
+        width : 490,
         height : 60
     }
     var redDivH={
-        width : 9,
+        width : 10,
         height : 60
     }
     let igra=0;//начало игры
@@ -130,7 +130,6 @@ document.body.addEventListener("keyup", (a) => {
    if (a.key === 'z')
      speedYRed=0
 })
-
 setInterval(tick,40);
 button.addEventListener("click",start)
     function start() {
@@ -152,13 +151,24 @@ var angle=parseFloat(angles[randomIndex])/180*Math.PI;
     }
     function tick() {
         
+        contextGreen.clearRect(490,yGreen,greenDivH.width,greenDivH.height);
     ballH.posX+=ballH.speedX;
     ballH.posY+=ballH.speedY;
         yRed+=speedYRed;
        yGreen+=speedYGreen;
+       context.fillStyle='yellow';
+  context.fillRect(0,0,canvas1.width,canvas1.height);
+  context.strokeStyle='black';
+  context.strokeRect(0,0, 500,300);
+       contextRed.fillStyle='red';
+  contextRed.fillRect(0,yRed,redDivH.width,redDivH.height);
        contextGreen.fillStyle='green';
   contextGreen.fillRect(490,yGreen,greenDivH.width,greenDivH.height);
-            if(yGreen<0){
+  contextBoll.beginPath();//мяч
+  contextBoll.arc(ballH.posX,ballH.posY, ballH.radius, 0,Math.PI*2, false);
+  contextBoll.fillStyle='blue';
+  contextBoll.fill();
+  if(yGreen<0){
                 yGreen=0;
             };
             if(yGreen>=240){
@@ -170,57 +180,40 @@ var angle=parseFloat(angles[randomIndex])/180*Math.PI;
             if(yRed>=240){
                 yRed=240;
             };
-          
-       
-    
-if ( ballH.posX+30>areaH.width && igra===1) {// вылетел ли мяч правее стены?
+if ( ballH.posX+19>=areaH.width && igra===1) {// вылетел ли мяч правее стены?
     ballH.speedX=0;
     ballH.speedY=0;
     namber1++;
     inputGreen.value=namber1;
     igra=2;
+    ballH.posX=485;
 }
-if ( ballH.posY+ballH.radius>=yGreen && ballH.posY+ballH.radius<=yGreen+greenDivH.height && ballH.posX+ballH.width>=greenDivH.width) {
+if ( ballH.posY>=yGreen && ballH.posY<=yGreen+greenDivH.height && ballH.posX+15>=greenDivH.width) {
     ballH.speedX=-ballH.speedX;
    //проверка на отбитие мяча зеленой ракеткой
 }
-if ( ballH.posY+ballH.radius>=yRed && ballH.posY+ballH.radius<=yRed+redDivH.height && ballH.posX<=redDivH.width) {
+if ( ballH.posY>=yRed && ballH.posY<=yRed+redDivH.height && ballH.posX-15<=redDivH.width) {
     ballH.speedX=-ballH.speedX;   
     //проверка на отбитие мяча красной ракеткой
 }
-if ( ballH.posX<0 && igra===1) {// вылетел ли мяч левее стены?
+if ( ballH.posX-18<=0 && igra===1) {// вылетел ли мяч левее стены?
     ballH.speedX=0;
     ballH.speedY=0;
-    ballH.posX=0;
+    ballH.posX=15;
     namber2++;
     inputRed.value=namber2;
     igra=2;
 }
-if ( ballH.posY+ballH.height>areaH.height ) {// вылетел ли мяч ниже пола?
+if ( ballH.posY+ballH.radius>areaH.height ) {// вылетел ли мяч ниже пола?
     ballH.speedY=-ballH.speedY;
-    ballH.posY=areaH.height-ballH.height;
+    ballH.posY=areaH.height-ballH.radius;
 }
-if ( ballH.posY<132 ) {// вылетел ли мяч выше потолка?
+if ( ballH.posY-15<0 ) {// вылетел ли мяч выше потолка?
     ballH.speedY=-ballH.speedY;
-    ballH.posY=132;
+    ballH.posY=15;
 }
-
 }
-
-
-
-
-
-
-
-
-
 </script>
-
-
-
-
-
-    <script src="index.js"></script>
+  
 </body>
 </html>
