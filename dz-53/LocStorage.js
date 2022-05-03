@@ -18,10 +18,7 @@
          getKeys(){
              console.log(Object.keys(this.storage))
          }
-       }
-      
-       class LocStorageClass {
-         
+       
         setItem(key,value)
          getItem(key)
          removeItem(key)
