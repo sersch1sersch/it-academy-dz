@@ -8,7 +8,8 @@ function addNapitok(){
     else
       alcogol='нет';
   drinkStorage.addValue(napitok,{'recipe': rezept,'alcogolic': alcogol});
-  drinkStorage.setItem(napitok,rezept);
+  
+  
 }
   function infoNapitok(){
     var napitok=prompt('Ввeдите название напитка');
@@ -20,13 +21,14 @@ function addNapitok(){
       var alc=q.alcogolic;
     alert('напиток : ' + napitok + '\n' + 'рецепт приготовления : '+ rez + '\n' + 'алкогольный : ' + alc);
   }
+  
 }
   function delNapitok(){
     var napitok=prompt('Ввeдите название напитка');
     if(drinkStorage.deleteValue(napitok)===true)
-    alert('напиток успешно удален из хранилища');
+    alert('напиток успешно удален из хранилища storage');
     else
-    alert('такой напиток отсутствует в хранилище');
+    alert('такой напиток отсутствует в хранилище storage');
   }
   function perNapitok(){
     alert(drinkStorage.getKeys())
@@ -41,79 +43,78 @@ function addNapitok(){
       else
       dessert='нет';
         dishesStorage.addValue(dish,{'recipe': rezept,'desserts': dessert});
-        dishesStorage.setItem(dish,rezept);
+        
   }
     function infoDish(){
       var dish=prompt('Ввeдите название блюда');
-      var  q = dishesStorage.getValue(dish);
-      if(q===undefined)
-      alert('такое блюдо отсутствует в хранилище');
+      var  b = dishesStorage.getValue(dish);
+      if(b===undefined)
+      alert('такое блюдо отсутствует в хранилище storage');
         else {
-        var rez=q.recipe;
-        var des=q.desserts;
-      alert('блюдо : ' + dish + '\n' + 'рецепт приготовления : '+ rez + '\n' + 'десерт : ' + des);
+        var reze=b.recipe;
+        var des=b.desserts;
+      alert('блюдо : ' + dish + '\n' + 'рецепт приготовления : '+ reze + '\n' + 'десерт : ' + des);
     }
   }
     function delDish(){
       var dish=prompt('Ввeдите название блюда');
       if(dishesStorage.deleteValue(dish)===true)
-      alert('блюдо успешно удален из хранилища');
+      alert('блюдо успешно удален из хранилища storage');
       else
-      alert('такое блюдо отсутствует в хранилище');
+      alert('такое блюдо отсутствует в хранилище storage');
     }
     function perDish(){
       alert(dishesStorage.getKeys().join('\n'))
     }
-    function delLocalStorage(){
-      var dish=prompt('Ввeдите название блюда или напитка');
-      if(localStorage.getItem(dish)!==null){
-        localStorage.removeItem(dish);
-      alert('напиток или блюдо успешно удаленo из  локального хранилища');
-      }
-      else{
-      alert('такой напиток или блюдо отсутствует в локального хранилище');
-      }
-    }
-    function sumLocalStorage(){
-      alert( "в локальном хранилище "+localStorage.length +" напитка или блюда")
-    }
-    function infoLocalStorage(){
-      for ( var i=0; i<localStorage.length; i++ ) {
-        var k=localStorage.key(i);
-      alert( "в локальном хранилище у напитка или блюда: "+k+" рецепт: "+localStorage[k] )
-   }
-  }
+    
+    
+    
   class LocStorageClass{
     storage ={};
      addValue (key,value) {
        this.storage[key]=value;
+      return localStorage.setItem(key,JSON.stringify(value));
        }
      getValue(key){
+       console.log(JSON.parse(localStorage.getItem(key)));
       if(key in this.storage)
       return this.storage[key];
      }
      deleteValue(key) {
            if(String(key) in this.storage)
              return delete this.storage[key];
+             if(localStorage.getItem(key)!==null){
+              localStorage.removeItem(key);
+            alert('напиток или блюдо успешно удаленo из  локального хранилища');
+            }
+            else{
+            alert('такой напиток или блюдо отсутствует в локального хранилище');
+            }
              return false;  
          }
          getKeys(){
-           console.log(Object.keys(this.storage))
+           console.log(Object.keys(this.storage));
+           alert( 'в локальном хранилище находятся '+ localStorage.length +' напитков или блюд');
+           for ( var i=0; i<localStorage.length; i++ ) {
+            var k=localStorage.key(i);
+            alert(k)
+         // console.log( "в локальном хранилище у напитка или блюда: "+k+","+" рецепт: "+(localStorage[k]) )
+       }
            return Object.keys(this.storage);
-         }
-         setItem(key,value){
-           return localStorage.setItem(key,value)
-         }
-         getItem(key){
-           return localStorage.getItem(key)
-         }
-         removeItem(key){
-          return localStorage.removeItem(key); 
-         }
-         length(){
-           return localStorage.length
-         }
-      }
+         }}
+        // setItem(key,value){
+        // return localStorage.setItem(key,value)
+        // }
+        // getItem(key){
+        //   return localStorage.getItem(key)
+        // }
+        // removeItem(key){
+          //return localStorage.removeItem(key); 
+         //}
+         //length(){
+           //return localStorage.length
+         //}
+      
 
            let dishesStorage = new LocStorageClass();
            let drinkStorage = new LocStorageClass();
