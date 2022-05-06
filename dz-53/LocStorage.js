@@ -85,7 +85,7 @@ function addNapitok(){
      this.storage ={};
      
       let keys = Object.keys(localStorage);
-      for(let key of Object.keys(localStorage)) {
+      for(let key of keys) {
          this.storage[key] = JSON.parse(localStorage.getItem(key));
       }
      
