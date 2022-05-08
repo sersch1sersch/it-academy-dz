@@ -81,19 +81,18 @@ function addNapitok(){
     
     
   class LocStorageClass{
-    constructor(){
+    constructor(_lsKeyName){
      this.storage ={};
-     
-      let keys = Object.keys(localStorage);
-      for(let key of keys) {
-         this.storage[key] = JSON.parse(localStorage.getItem(key));
-      }
+   this.lsKeyName=_lsKeyName;
+    if(localStorage[_lsKeyName])
+    this.storage=JSON.parse(localStorage[_lsKeyName])
+      
      
     }
     
      addValue (key,value) {
        this.storage[key]=value;
-      return localStorage.setItem(key,JSON.stringify(value));
+       localStorage[this.lsKeyName]=JSON.stringify(this.storage);
        }
      getValue(key){
        JSON.parse(localStorage.getItem(key));
@@ -101,33 +100,18 @@ function addNapitok(){
       return this.storage[key];
      }
      deleteValue(key) {
+      localStorage[this.lsKeyName]=JSON.stringify(this.storage);
            if(String(key) in this.storage)
              return delete this.storage[key];
-              localStorage.removeItem(key);
              return false;  
          }
          getKeys(){
-           //console.log(Object.keys(this.storage));
-          // for ( var i=0; i<localStorage.length; i++ ) {
-          //  var k=localStorage.key(i);
-          //   return k;
-          //  }
+          
            return Object.keys(this.storage);
          }
          }
-        // setItem(key,value){
-        // return localStorage.setItem(key,value)
-        // }
-        // getItem(key){
-        //   return localStorage.getItem(key)
-        // }
-        // removeItem(key){
-          //return localStorage.removeItem(key); 
-         //}
-         //length(){
-           //return localStorage.length
-         //}
+        
       
 
-           let dishesStorage = new LocStorageClass();
-           let drinkStorage = new LocStorageClass();
+           let dishesStorage = new LocStorageClass('lsDishes');
+           let drinkStorage = new LocStorageClass('lsDrink');
