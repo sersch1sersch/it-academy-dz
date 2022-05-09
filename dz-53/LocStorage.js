@@ -98,7 +98,7 @@ function addNapitok(){
        localStorage[this.lsKeyName]=JSON.stringify(this.storage);
        }
      getValue(key){
-       JSON.parse(localStorage.getItem(key));
+       
       if(key in this.storage)
       return this.storage[key];
      }
