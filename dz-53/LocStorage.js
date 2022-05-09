@@ -25,10 +25,12 @@ function addNapitok(){
 }
   function delNapitok(){
     var napitok=prompt('Ввeдите название напитка');
-    if(drinkStorage.deleteValue(napitok)===true)
+    if(drinkStorage.deleteValue(napitok)===true){
     alert('напиток успешно удален из хранилища');
-    else
+    }else{
     alert('такой напиток отсутствует в хранилище');
+    }
+    drinkStorage.deleteValue(napitok);
   }
   function perNapitok(){
     if(Object.keys(drinkStorage.storage).length == 0){
@@ -64,10 +66,11 @@ function addNapitok(){
   }
     function delDish(){
       var dish=prompt('Ввeдите название блюда');
-      if(dishesStorage.deleteValue(dish)===true)
+      if(dishesStorage.deleteValue(dish)===true){
       alert('блюдо успешно удален из хранилища ');
-      else
-      alert('такое блюдо отсутствует в хранилище ');
+      }else{
+      alert('такое блюдо отсутствует в хранилище ');}
+      dishesStorage.deleteValue(dish);
     }
     function perDish(){
       if(Object.keys(dishesStorage.storage).length == 0){
@@ -100,10 +103,11 @@ function addNapitok(){
       return this.storage[key];
      }
      deleteValue(key) {
-      localStorage[this.lsKeyName]=JSON.stringify(this.storage);
-           if(String(key) in this.storage)
-             return delete this.storage[key];
-             return false;  
+       localStorage[this.lsKeyName]=JSON.stringify(this.storage)
+       if(String(key) in this.storage)
+       return delete this.storage[key];
+       return false;  
+
          }
          getKeys(){
           
