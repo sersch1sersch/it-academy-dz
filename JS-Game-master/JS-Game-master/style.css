@@ -1,0 +1,57 @@
+.pole{
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    height: 550px;
+}
+.car{
+    position: absolute;
+transform: rotate(0deg);
+left:147px;
+top:410px
+}
+.treck{
+position: relative;
+}
+.automotive{
+    position: absolute;
+    width:52px;
+     height:100px;
+     display: none;
+}
+.convertible{
+    position: absolute;
+    width:52px;
+     height:100px;
+    display: none;
+}
+.delahaye{
+    position: absolute;
+    width:52px;
+     height:100px;
+    display: none;
+}
+.mini-cooper{
+    position: absolute;
+    width:52px;
+     height:106px;
+    display: none;
+}
+.police{
+    position: absolute;
+    width:52px;
+     height:100px;
+    display: none;
+}
+.sports{
+    position: absolute;
+    width:52px;
+     height:101px;
+     display: none;
+}
+.bus{
+    position: absolute;
+    width:52px;
+     height:101px;
+     display: none;
+}
