@@ -131,27 +131,18 @@ document.body.addEventListener("keyup", (a) => {//управление глав�
 
 polyline1.setAttribute("points",'87,'+y1+" "+'87,1500')
 polyline2.setAttribute("points",'260,'+y1+" "+'260,1500')
-function rand(){
-let randoms;
+randoms =Math.floor(Math.random() * 7);
+randomCar.push(cars[randoms]);
+randomPolosa=Math.floor(Math.random() * 4);
+polosaN.push(polosa[randomPolosa])
 
-  randoms =Math.floor(Math.random() * 7);
-  randomCar.push(cars[randoms]);
-  randomCar[0].style.display="block";
-  randomCar[0].style.left=polosa1.leftPolosa+"px"
-  randomCar[0].style.top=topPolosa1+"px"  //координаты не меняются
-  randomCar[0].style.top=topPolosa1+"px" 
- if(topPolosa1>570){
-  randomCar[0].style.display="none";
-  randomCar[0].style.top=0;
-randomCar.pop();
-}
-}
-
+let k=0
 
 function tick(){
     y1+=yy;
     topPolosa1+=speedPolosa;
-    //console.log(topPolosa1)   //координаты меняются
+    
+    k++
     top1+=speedY;
     left1+=speedX;
     polyline1.setAttribute("points",'87,'+y1+" "+'87,1500')//движение линий
@@ -159,9 +150,24 @@ function tick(){
     car.style.top=top1+"px";
     car.style.left=left1+"px";
     
+    randomCar[0].style.top=topPolosa1+"px"
+    randomCar[0].style.left=polosaN+"px"
     
-   
-    rand()
-   }
+    
+    if(topPolosa1>570){
+      randomCar[0].style.display="none";
+      randomCar[0].style.top=0;
+   randomCar.shift();
+    polosaN.shift();
+    randoms =Math.floor(Math.random() * 7);
+  randomCar.push(cars[randoms]);
+  randomPolosa=Math.floor(Math.random() * 4);
+  polosaN.push(polosa[randomPolosa])
+  topPolosa1=-110
+  randomCar[0].style.display="block";
+  randomCar[0].style.left=polosaN+"px"
+  randomCar[0].style.top=topPolosa1+"px"
+    }
+}
     
 
