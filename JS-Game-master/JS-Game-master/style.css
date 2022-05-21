@@ -17,41 +17,48 @@ position: relative;
     position: absolute;
     width:52px;
      height:100px;
-     display: none;
+     transform: translateZ(0);
+     top:-110px
 }
 .convertible{
     position: absolute;
     width:52px;
      height:100px;
-    display: none;
+     transform: translateZ(0);
+    top:-110px
 }
 .delahaye{
     position: absolute;
     width:52px;
      height:100px;
-    display: none;
+     transform: translateZ(0);
+    top:-110px
 }
 .mini-cooper{
     position: absolute;
     width:52px;
      height:106px;
-    display: none;
+     transform: translateZ(0);
+    top:-110px
 }
 .police{
     position: absolute;
     width:52px;
      height:100px;
-    display: none;
+     transform: translateZ(0);
+    top:-110px
 }
 .sports{
     position: absolute;
     width:52px;
      height:101px;
-     display: none;
+     transform: translateZ(0);
+     top:-110px
 }
 .bus{
     position: absolute;
     width:52px;
      height:101px;
-     display: none;
+     transform: translateZ(0);
+     top:-110px
 }
